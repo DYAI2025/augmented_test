@@ -1,21 +1,53 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Augmented_Ops Spiral
 
-# Run and deploy your AI Studio app
+Scroll-driven React/Vite website for the Augmented_Ops agency mesh, including static sub-sites and investor deck assets in `public/`.
 
-This contains everything you need to run your app locally.
+## Local development
 
-View your app in AI Studio: https://ai.studio/apps/4686725d-5ee8-4a35-be37-81e761f2a83e
+**Prerequisites**
 
-## Run Locally
+- Node.js 20+
+- npm 10+
 
-**Prerequisites:**  Node.js
+```bash
+npm install
+npm run dev
+```
 
+The development server listens on `0.0.0.0:3000`.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-# augmented_test
+## Production build
+
+```bash
+npm run build
+npm run start
+```
+
+`npm run start` serves the generated `dist/` directory with Express and reads the port from `process.env.PORT`, which is required for Railway deployments. A health endpoint is available at `/healthz`.
+
+## Railway deployment
+
+This repository is ready for Railway via `railway.json`:
+
+- Builder: Nixpacks
+- Build command: `npm ci && npm run build`
+- Start command: `npm run start`
+- Healthcheck: `/healthz`
+
+### Deploy checklist
+
+1. Create a new Railway project from this Git repository.
+2. Keep the default root directory (`/`).
+3. Do not add a fixed `PORT`; Railway injects it automatically.
+4. Optional: set `APP_URL` to the final Railway public domain if future features need absolute links.
+5. Deploy and verify `/healthz` returns `{ "status": "ok" }`.
+
+## Useful scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start Vite development server |
+| `npm run lint` | Run TypeScript checks |
+| `npm run build` | Build static production assets |
+| `npm run start` | Serve `dist/` for production/Railway |
+| `npm run clean` | Remove `dist/` |
