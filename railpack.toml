@@ -1,10 +1,5 @@
 [build]
-cmd = "npm ci && npm run build"
+cmd = "npm run build"
 
 [start]
-cmd = "npm start"
-
-[[cache]]
-# Disable the node_modules/.cache mount to prevent EBUSY lock errors
-# during npm ci cleanup on Railway builds
-disabled = true
+cmd = "npm run start"
