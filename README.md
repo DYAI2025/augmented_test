@@ -29,8 +29,8 @@ npm run start
 
 This repository is ready for Railway via `railway.json`:
 
-- Builder: Nixpacks
-- Build command: `npm ci && npm run build`
+- Builder: Railpack
+- Build command: `npm run build`
 - Start command: `npm run start`
 - Healthcheck: `/healthz`
 
@@ -41,6 +41,8 @@ This repository is ready for Railway via `railway.json`:
 3. Do not add a fixed `PORT`; Railway injects it automatically.
 4. Optional: set `APP_URL` to the final Railway public domain if future features need absolute links.
 5. Deploy and verify `/healthz` returns `{ "status": "ok" }`.
+
+Railpack already runs the dependency installation phase from `package-lock.json`; the explicit build command must stay limited to `npm run build` so the build phase does not run a second `npm ci` against a mounted `node_modules` cache.
 
 ## Useful scripts
 
