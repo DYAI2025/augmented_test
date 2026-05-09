@@ -1,0 +1,15 @@
+# Exclude sub-project directories with their own package.json/node_modules
+CSA/
+MSA/
+RSA/
+VSA/
+
+# Exclude large binary/archive files
+RSA/Augmented_Ops Design System.zip
+VSA/VSA (1).zip
+
+# Exclude docs and markdown-only content
+docs/
+
+# Exclude backup files
+*.bak
