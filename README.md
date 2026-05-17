@@ -31,7 +31,7 @@ This repository is ready for Railway via `railway.json` and the root `Dockerfile
 
 - Builder: Dockerfile
 - Build step: `npm ci` followed by `npm run build` inside the image build stage
-- Runtime command: `node server.js` (set explicitly in `railway.json` and matching the Docker `CMD`)
+- Runtime command: Docker `CMD ["node", "server.js"]`
 - Healthcheck: `/healthz`
 
 ### Deploy checklist
@@ -42,7 +42,7 @@ This repository is ready for Railway via `railway.json` and the root `Dockerfile
 4. Optional: set `APP_URL` to the final Railway public domain if future features need absolute links.
 5. Deploy and verify `/healthz` returns `{ "status": "ok" }`.
 
-The Dockerfile builds the Vite assets in a dedicated build stage, prunes development dependencies, and copies only the production server, production dependencies, and `dist/` output into the runtime image. `railway.json` also sets the exact start command so Railway does not inherit a stale dashboard start command or interpret a missing command differently from the Docker `CMD`.
+The Dockerfile builds the Vite assets in a dedicated build stage, prunes development dependencies, and copies only the production server, production dependencies, and `dist/` output into the runtime image. This avoids Railway builder auto-detection issues and makes the deployed start command deterministic.
 
 ## Useful scripts
 
